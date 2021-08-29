@@ -1,0 +1,35 @@
+<div class="border border-light p-5 createAndEditTask">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <h1 class="h4 mb-4 text-center">Profil bearbeiten</h1>
+
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-Mail", class: "form-control mb-4" %>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <i>(kann weggelassen werden, wenn sich das Passwort nicht ändern soll)</i><br/>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Passwort", class: "form-control mb-4" %>
+    <% if @minimum_password_length %>
+      <br/>
+      <em>Das Passwort muss mindestens <%= @minimum_password_length %> Zeichen enthalten</em>
+    <% end %>
+
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Passwort wiederholen", class: "form-control mb-4" %>
+
+    <i>(bitte das alte Passwort angeben, um die Änderungen zu bestätigen)</i><br/>
+    <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Aktuelles Passwort", class: "form-control mb-4" %>
+
+    <%= f.submit "Speichern", class: "button edit-profile-buttons formElements" %>
+  <% end %>
+
+  <hr>
+
+  <h3>Account löschen</h3>
+
+  <p>Hier kannst du deinen Account löschen, wenn du unzufrieden mit der Todo-App bist.</p>
+  <%= button_to "Account löschen", registration_path(resource_name), data: { confirm: "Willst du wirklich deinen Account löschen? Diese Aktion kann nicht mehr rückgängig gemacht werden." }, method: :delete, class: "button edit-profile-buttons formElements" %>
+  <%= link_to "Abbrechen", :back, class: "button edit-profile-buttons button-link formElements" %>
+</div>

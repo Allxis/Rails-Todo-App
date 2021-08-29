@@ -1,0 +1,42 @@
+<h1 class="todos_headline">Pinnwand</h1>
+
+<% @todos.each do |todo| %>
+  <!-- only present currently logged in user his own tasks, not those of other users too -->
+  <% if todo.user == current_user %>
+    <div class="card text-black mx-auto task" style="max-width: 90rem;">
+      <div class="card-header">
+        <h3><%= todo.title %></h3>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Beschreibung:</h5>
+        <p class="card-text"><%= todo.note %></p>
+        <h5 class="card-title">Ablaufdatum:</h5>
+        <p class="card-text"><%= todo.expiration_date.strftime('%d.%m.%Y') %></p>
+        <h5 class="card-title">Bearbeitungsstand:</h5>
+        <% if todo.done == false %>
+          <p class="card-text" style="color: orange"><%= "Wurde noch nicht erledigt!" %></p>
+          <% if Date.today > todo.expiration_date %>
+            <h4 class="card-title" style="color: red"><i class="bi bi-hourglass-bottom"></i> Die Zeit ist
+              abgelaufen!</h4>
+          <% end %>
+
+          <% if todo.expiration_date - Date.today == 1 || todo.expiration_date == Date.today %>
+            <h4 class="card-title" style="color: orange"><i class="bi bi-hourglass-split"></i> Noch ein Tag bis die Zeit
+              abgelaufen ist!</h4>
+          <% end %>
+        <% else %>
+          <p class="card-text" style="color: green">Wurde bereits erledigt! <i class="bi bi-check-circle"></i></p>
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-outline-grey">
+          <i class="bi-gear"></i>
+          <%= link_to 'Bearbeiten', edit_todo_path(todo), class: "card-buttons" %></button>
+        <button class="btn btn-outline-danger">
+          <i class="bi bi-trash"></i>
+          <%= link_to 'Löschen', todo, method: :delete, data: { confirm: 'Soll diese Notiz wirklich gelöscht werden?' }, class: "card-buttons" %>
+        </button>
+      </div>
+    </div>
+  <% end %>
+<% end %>

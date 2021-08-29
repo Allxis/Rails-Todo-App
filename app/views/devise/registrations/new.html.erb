@@ -1,0 +1,37 @@
+<!-- Default form register -->
+<div class="text-center border border-light p-5 auth">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <p class="h4 mb-4">Registrierung</p>
+
+    <!-- E-mail -->
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-Mail", class: "form-control mb-4", required: true %>
+
+    <!-- Password -->
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Passwort", class: "form-control", required: true %>
+    <% if @minimum_password_length %>
+      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+        Das Passwort muss aus mindestens <em><%= @minimum_password_length %> Zeichen</em> bestehen!
+      </small>
+    <% end %><br/>
+
+    <!-- Password confirmation -->
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Passwort wiederholen", required: true %>
+
+    <!-- Sign up button -->
+    <%= f.submit "Registrieren", class: "button auth-buttons" %>
+
+    <hr>
+
+    <!-- Terms of service -->
+    <p>Durch das Klicken von
+      <em>Registrieren</em> stimmen Sie unseren
+      <a style="color: #663300" onclick="window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';" target="_blank">Nutzungsbedingungen</a> zu
+    </p>
+
+  <% end %>
+
+  <p>Schon registriert? Jetzt <%= link_to "Einloggen!", new_session_path(resource_name), class: "link" %></p>
+
+</div>
+<!-- Default form register -->

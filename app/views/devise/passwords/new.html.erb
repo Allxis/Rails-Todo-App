@@ -1,0 +1,15 @@
+<div class="border border-light p-5 createAndEditTask">
+  <h2 class="formElements">Passwort vergessen?</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-Mail", required: true, class: "form-control mb-4 formElements" %>
+
+    <%= f.submit "E-Mail zum Zurücksetzen des Passworts an mich senden", class: "button new-password-buttons" %>
+  <% end %>
+
+  <%= link_to "Zurück zum Login", new_session_path(resource_name), class: "button new-password-buttons button-link" %>
+</div>
+
+

@@ -1,0 +1,50 @@
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark" id="header">
+  <!-- App Icon -->
+  <%= link_to image_tag("pngwing.com.png", :width => 50, :height => 50), root_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+          aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+    <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "Zu den Aufgaben", todos_path, class: "nav-link", :style => 'color: #fff2e6; font-size: 25px;' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Neue Aufgabe", new_todo_path, class: "nav-link", :style => 'color: #fff2e6; font-size: 25px;' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Login", new_user_session_url, class: "nav-link", :style => 'color: #fff2e6; font-size: 25px;' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Registrieren", new_user_registration_url, class: "nav-link", :style => 'color: #fff2e6; font-size: 25px;' %>
+        </li>
+      <% end %>
+
+      <% if user_signed_in? %>
+        </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i>
+            </a>
+            <!-- Profile Icon Menu -->
+            <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                 aria-labelledby="navbarDropdownMenuLink-333">
+              <%= link_to edit_user_registration_path, class: "nav-link ownLink", :style => 'color: black; font-size: 15px;' do %>
+                <i class="bi-gear navbarMenuLink"> Profil bearbeiten</i>
+              <% end %>
+              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link", :style => 'color: black; font-size: 15px;' do %>
+                <i class="bi-power navbarMenuLink"> Logout</i>
+              <% end %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+      </div>
+</nav>
+<!--/.Navbar -->

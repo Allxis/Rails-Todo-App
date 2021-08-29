@@ -1,0 +1,41 @@
+<!-- <#%= render 'form', todo: @todo %> -->
+
+<!--<#%= render 'form', todo: @todo %>-->
+
+<div class="border border-light p-5 createAndEditTask">
+  <%= form_with(model: @todo) do |form| %>
+    <h1 class="formElements">Aufgabe bearbeiten</h1>
+
+    <% if @todo.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+        <ul>
+          <% @todo.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form.text_field :title, :placeholder => "Titel", class: "form-control formElements", required: true %>
+
+    <%= form.text_area :note, :placeholder => "Notiz", class: "form-control rounded-0 formElements", required: true %>
+
+    <%= form.label "Aufgabe bereits erledigt? " %>
+    <%= form.check_box :done %>
+
+    <div>
+      <%= form.label "Ablaufdatum", class: "formElements" %>
+      <%= form.date_select :expiration_date, class: "formElements" %>
+    </div>
+
+    <!-- Note: id must be implicitly given to the form, 'cause user and task are connected through the user's id -->
+    <%= form.number_field :user_id, id: :todos_user_id, :value => current_user.id, type: :hidden %>
+
+    <%= form.submit class: "button new-buttons formElements", value: "Speichern" %>
+
+    <%= link_to 'Abbrechen', todos_path, class: "button new-buttons button-link formElements" %>
+
+  <% end %>
+</div>

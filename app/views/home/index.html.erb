@@ -1,0 +1,13 @@
+<div class="homepageContainer">
+  <% if user_signed_in? %>
+    <h1>Willkommen!</h1>
+    <p class="homepageContent">Über <%= link_to "Neue Aufgabe", new_todo_path, class: "link" %> kannst du ganz einfach eine neue Aufgabe hinterlegen und anpinnen. Die fälligen
+      Aufgaben findest du anschließend unter <%= link_to "Zu den Aufgaben", todos_path, class: "link" %>. </p>
+    <p class="homepageContent">Zum ausloggen geht es ins Kontextmenü oben rechts, dort kannst du auch dein <%= link_to "Profil bearbeiten", edit_user_registration_path, class: "link" %>, wenn du daran etwas
+      ändern möchtest.</p>
+  <% else %>
+    <h1>Niemals wieder vergessen, was es zu tun gibt!</h1>
+    <p class="homepageContent">Mit der Todo-App ganz bequem verwalten, was noch zu tun ist. Jetzt einen <%= link_to "Account", new_user_registration_url, class: "link" %> erstellen. </p>
+    <p class="homepageContent">Du hast schon einen Account? Dann auf zum <%= link_to "Login", new_user_session_url, class: "link" %>!</p>
+  <% end %>
+</div>
